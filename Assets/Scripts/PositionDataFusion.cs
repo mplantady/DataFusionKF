@@ -20,17 +20,17 @@ public class PositionDataFusion
     /// <summary>
     /// Initialize Kalman Filtering objects and matrix
     /// </summary>
-    public PositionDataFusion(float deltaTime, Vector3 initialPosition, float processCovariance, float positionDeviation, float velocityDeviation)
+    public PositionDataFusion(float dt, Vector3 initialPosition, float processCovariance, float positionDeviation, float velocityDeviation)
     {
         _processCovariance = processCovariance;
 
-        float a = 0.5f * Mathf.Pow(deltaTime, 2);
-        _transitionMat = new Matrix(new double[,] { { 1, 0, 0, deltaTime, 0, 0, a, 0, 0 },
-                                                    { 0, 1, 0, 0, deltaTime, 0, 0, a, 0 },
-                                                    { 0, 0, 1, 0, 0, deltaTime, 0, 0, a },
-                                                    { 0, 0, 0, 1, 0, 0, deltaTime, 0, 0 },
-                                                    { 0, 0, 0, 0, 1, 0, 0, deltaTime, 0 },
-                                                    { 0, 0, 0, 0, 0, 1, 0, 0, deltaTime },
+        float a = 0.5f * Mathf.Pow(dt, 2);
+        _transitionMat = new Matrix(new double[,] { { 1, 0, 0, dt, 0, 0, a, 0, 0 },
+                                                    { 0, 1, 0, 0, dt, 0, 0, a, 0 },
+                                                    { 0, 0, 1, 0, 0, dt, 0, 0, a },
+                                                    { 0, 0, 0, 1, 0, 0, dt, 0, 0 },
+                                                    { 0, 0, 0, 0, 1, 0, 0, dt, 0 },
+                                                    { 0, 0, 0, 0, 0, 1, 0, 0, dt },
                                                     { 0, 0, 0, 0, 0, 0, 1, 0, 0 },
                                                     { 0, 0, 0, 0, 0, 0, 0, 1, 0 },
                                                     { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
